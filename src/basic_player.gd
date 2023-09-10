@@ -5,7 +5,7 @@ const JUMP_VELOCITY = -400.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
+var freeze = false
 
 func _enter_tree():
 	# call_deferred is required for setting initial spawn point at server
@@ -18,9 +18,9 @@ func _enter_tree():
 
 
 func _physics_process(delta):
-	if self.is_multiplayer_authority():
+	if self.is_multiplayer_authority() and !freeze:
 		# Do move
-		self.velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * SPEED
+		self.velocity = Input.get_vector("left", "right", "up", "down") * SPEED
 		self.move_and_slide()
 
 func speek(message: String):

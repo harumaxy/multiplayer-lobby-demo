@@ -13,7 +13,10 @@ func _ready():
 	%join.pressed.connect(_on_join_pressed)
 	%send.pressed.connect(_on_send_pressed)
 	%message.text_submitted.connect(func(_message): _on_send_pressed())
+	%message.focus_entered.connect(func(): freeze_my_player(true))
+	%message.focus_exited.connect(func(): freeze_my_player(false))
 	
+
 func _on_host_pressed():
 	peer.create_server(135)
 	self.multiplayer.multiplayer_peer = peer
@@ -44,4 +47,10 @@ func _on_send_pressed():
 		%message.clear()
 		%send.disabled = true
 		get_tree().create_timer(1).timeout.connect(func(): %send.disabled = false)
+		get_viewport().gui_release_focus()
 
+
+func freeze_my_player(freeze: bool):
+	var my_player = player_list.get_node(str(peer.get_unique_id()))
+	if my_player != null:
+		my_player.freeze = freeze
