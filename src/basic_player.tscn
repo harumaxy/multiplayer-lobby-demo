@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://g0dd43ypidso"]
+
+[ext_resource type="Texture2D" uid="uid://bf0dau0tgomtm" path="res://icon.svg" id="1_0hy83"]
+[ext_resource type="Script" path="res://src/basic_player.gd" id="1_6pbad"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fbg8r"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/0/watch = false
+properties/1/path = NodePath("MessagePos/SpeechBubble:visible")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+properties/2/path = NodePath("MessagePos/SpeechBubble/PanelContainer/Speech:text")
+properties/2/spawn = true
+properties/2/sync = true
+properties/2/watch = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vmqcm"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.129412, 0.129412, 0.129412, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.419608, 0.0862745, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+
+[sub_resource type="SystemFont" id="SystemFont_0qe31"]
+
+[node name="BasicPlayer" type="CharacterBody2D"]
+position = Vector2(0, -1)
+script = ExtResource("1_6pbad")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0hy83")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_fbg8r")
+
+[node name="MessagePos" type="Marker2D" parent="."]
+position = Vector2(91, -52)
+
+[node name="SpeechBubble" type="Control" parent="MessagePos"]
+unique_name_in_owner = true
+visible = false
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MessagePos/SpeechBubble"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vmqcm")
+
+[node name="Speech" type="Label" parent="MessagePos/SpeechBubble/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_0qe31")
+text = "Dummy Text"
