@@ -15,10 +15,6 @@ run/main_scene="res://src/multiplayer_test.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-Helpers="*res://addons/2d_essentials/autoload/helpers.tscn"
-
 [debug]
 
 multirun/number_of_windows=3
