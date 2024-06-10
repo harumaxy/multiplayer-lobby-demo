@@ -30,7 +30,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/2d_essentials/plugin.cfg", "res://addons/SignalVisualizer/plugin.cfg", "res://addons/multirun/plugin.cfg")
+enabled=PackedStringArray("res://addons/multirun/plugin.cfg")
 
 [input]
 
